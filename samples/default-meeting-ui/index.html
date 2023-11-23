@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Default Meeting UI | Dyte UI Kit</title>
+
+  <head>
+      <!--
+        For the UI Kit and Web Core script tags,
+        make sure to use the latest versions in the URL when you're using this
+      -->
+
+      <!-- Import helper to load UI Kit components -->
+      <script type="module">
+        import { defineCustomElements } from 'https://cdn.jsdelivr.net/npm/@dytesdk/ui-kit@1.53.0/loader/index.es2017.js';
+        defineCustomElements();
+      </script>
+
+      <!-- Import Web Core via CDN too -->
+      <script src="https://cdn.dyte.in/core/dyte-1.20.0.js"></script>
+    </head>
+  </head>
+  <body>
+    <dyte-meeting id="my-meeting" show-setup-screen="true" />
+
+    <script src="https://erp.nletschool.com/public/backend/front/theme5/js/jquery-3.7.0.min.js"></script>
+    <script>
+      const searchParams = new URL('http://localhost:3000/?authToken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdJZCI6IjU4MzljNTIxLWU5NDctNDA1NS1hOWRmLWQ1MTJjZjY0NjJmNyIsIm1lZXRpbmdJZCI6ImJiYjUxNWJkLWMyYmItNDc0My1hNzY3LTZhMmM1YzM5YjQxZiIsInBhcnRpY2lwYW50SWQiOiJhYWFkNWE1MC00ZDYxLTRlNDktYjFiMC0yNWE0NzI1NTBmYjgiLCJwcmVzZXRJZCI6IjliZjllN2JlLWEwMjktNDAyZS04YzliLWNmOWY5MTZmZjM0OSIsImlhdCI6MTcwMDcyMDU5OCwiZXhwIjoxNzA5MzYwNTk4fQ.BIFOu8Db1AUbhGwuvVyDIpi00ueJiL61D4B5pjewYk0L602toniDT-h5TIG3HNI7ivZG8fM5H989dD-_zkalqk580USMKxF93njKS0eYIql2EKReV0fekwFuMl34dsmjBox3zis7SOeoJ8Q-wxyIhs20MNPjafXlUIFubIn3AsxM-EzNtWhcF9fDoVOPD4ff-R2R4aMAz8meram4qoKdW-AAIaXEea4KvO2yEBmqAHVt1iIAJKnSyjfnkSCjC-z1pfXw-M9xehX0lmURbOhqO8GigV9Jk-OG8JfPoKzCVgiggFd94Oqqhs8qhdJZV9vt9HxlXOPASLSdRPNOsEK_sw').searchParams;
+
+      const authToken = searchParams.get('authToken');
+
+      // pass an empty string when using v2 meetings
+      // for v1 meetings, you would need to pass the correct roomName here
+      const roomName = searchParams.get('roomName') || '';
+
+      if (!authToken) {
+        alert(
+          "An authToken wasn't passed, please pass an authToken in the URL query to join a meeting."
+          ); 
+      }
+
+      // Initialize a meeting 
+      const meeting = DyteClient.init({
+        authToken,
+      }).then((meeting) => {
+        document.getElementById('my-meeting').meeting = meeting;
+      });
+
+      setTimeout(function(){
+      alert('dsdshere');   
+      DyteParticipants.joined.on('participantLeft', (participant) => { 
+          alert('here');
+        });
+}, 5000);
+
+
+
+
+
+    </script>
+  </body>
+  <script>
+    $(document).ready(function(){
+     $(document).on('click',":button",function() {
+      alert("button click");  
+    });
+   })
+
+ </script>
+ </html>
