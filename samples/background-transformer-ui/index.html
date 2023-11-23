@@ -282,23 +282,22 @@
       }
 
       async function initMeeting() {
-        const searchParams = new URL('http://localhost:3000/?authToken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdJZCI6IjU4MzljNTIxLWU5NDctNDA1NS1hOWRmLWQ1MTJjZjY0NjJmNyIsIm1lZXRpbmdJZCI6ImJiYjUxNWJkLWMyYmItNDc0My1hNzY3LTZhMmM1YzM5YjQxZiIsInBhcnRpY2lwYW50SWQiOiJhYWFkNWE1MC00ZDYxLTRlNDktYjFiMC0yNWE0NzI1NTBmYjgiLCJwcmVzZXRJZCI6IjliZjllN2JlLWEwMjktNDAyZS04YzliLWNmOWY5MTZmZjM0OSIsImlhdCI6MTcwMDcyMDU5OCwiZXhwIjoxNzA5MzYwNTk4fQ.BIFOu8Db1AUbhGwuvVyDIpi00ueJiL61D4B5pjewYk0L602toniDT-h5TIG3HNI7ivZG8fM5H989dD-_zkalqk580USMKxF93njKS0eYIql2EKReV0fekwFuMl34dsmjBox3zis7SOeoJ8Q-wxyIhs20MNPjafXlUIFubIn3AsxM-EzNtWhcF9fDoVOPD4ff-R2R4aMAz8meram4qoKdW-AAIaXEea4KvO2yEBmqAHVt1iIAJKnSyjfnkSCjC-z1pfXw-M9xehX0lmURbOhqO8GigV9Jk-OG8JfPoKzCVgiggFd94Oqqhs8qhdJZV9vt9HxlXOPASLSdRPNOsEK_sw').searchParams;
-
-        const authToken = searchParams.get('authToken');
+      
+        const authToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdJZCI6IjU4MzljNTIxLWU5NDctNDA1NS1hOWRmLWQ1MTJjZjY0NjJmNyIsIm1lZXRpbmdJZCI6ImJiYjUxNWJkLWMyYmItNDc0My1hNzY3LTZhMmM1YzM5YjQxZiIsInBhcnRpY2lwYW50SWQiOiJhYWFkNWE1MC00ZDYxLTRlNDktYjFiMC0yNWE0NzI1NTBmYjgiLCJwcmVzZXRJZCI6IjliZjllN2JlLWEwMjktNDAyZS04YzliLWNmOWY5MTZmZjM0OSIsImlhdCI6MTcwMDcyMDU5OCwiZXhwIjoxNzA5MzYwNTk4fQ.BIFOu8Db1AUbhGwuvVyDIpi00ueJiL61D4B5pjewYk0L602toniDT-h5TIG3HNI7ivZG8fM5H989dD-_zkalqk580USMKxF93njKS0eYIql2EKReV0fekwFuMl34dsmjBox3zis7SOeoJ8Q-wxyIhs20MNPjafXlUIFubIn3AsxM-EzNtWhcF9fDoVOPD4ff-R2R4aMAz8meram4qoKdW-AAIaXEea4KvO2yEBmqAHVt1iIAJKnSyjfnkSCjC-z1pfXw-M9xehX0lmURbOhqO8GigV9Jk-OG8JfPoKzCVgiggFd94Oqqhs8qhdJZV9vt9HxlXOPASLSdRPNOsEK_sw';
 
         // pass an empty string when using v2 meetings
         // for v1 meetings, you would need to pass the correct roomName here
-        const roomName = searchParams.get('roomName') || '';
+        const roomName =  '';
 
         if (!authToken) {
           alert(
             "An authToken wasn't passed, please pass an authToken in the URL query to join a meeting."
           );
-        }
+        } 
 
         const meeting = await DyteClient.init({
           authToken,
-          roomName,
+          roomName, 
         });
 
         document.getElementById('my-meeting').meeting = meeting;
@@ -306,7 +305,7 @@
 
         meeting.self.on('roomLeft', ({ state }) => {
   if (state === 'left') {
-    console.log('User has left the meeting');
+    window.location.href='https://www.google.com/';
   }
 });
      
